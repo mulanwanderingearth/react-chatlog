@@ -1,21 +1,25 @@
 import './ChatEntry.css';
+import TimeStamp from './TimeStamp.jsx';
+import PropTypes from 'prop-types';
 
-const ChatEntry = () => {
+const ChatEntry = (props) => {
   return (
     // Replace the outer tag name with a semantic element that fits our use case
-    <replace-with-relevant-semantic-element className="chat-entry local">
-      <h2 className="entry-name">Replace with name of sender</h2>
+    <div className={`chat-entry ${props.className}`}>
+      <h2 className="entry-name">{props.sender}</h2>
       <section className="entry-bubble">
-        <p>Replace with body of ChatEntry</p>
-        <p className="entry-time">Replace with TimeStamp component</p>
+        <p>{props.body}</p>
+        <p className="entry-time"><TimeStamp time={props.timeStamp} /></p>
         <button className="like">🤍</button>
       </section>
-    </replace-with-relevant-semantic-element>
+    </div>
   );
 };
 
 ChatEntry.propTypes = {
-  // Fill with correct proptypes
+  sender: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  timeStamp: PropTypes.string.isRequired,
 };
 
 export default ChatEntry;
