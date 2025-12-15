@@ -5,7 +5,7 @@ import messages from './data/messages.json';
 
 const App = () => {
   const [newMessages, setMessages] = useState(messages);
-  let likeCount = newMessages.filter(message => message.liked).length;
+  const likeCount = newMessages.filter(message => message.liked).length;
 
   const toggleLike = (messageId) => {
     setMessages(messages => {
