@@ -5,17 +5,20 @@ const ChatLog = (props) => {
   const ChatEntryComponent = props.entries.map(entry => {
     let messageClass;
     if (entry.sender === 'Vladimir') {
-      messageClass ='remote';
+      messageClass = 'remote';
     } else {
-      messageClass ='local';
+      messageClass = 'local';
     };
     return (
       <ChatEntry
+        id={entry.id}
         className={messageClass}
         key={entry.id}
         sender={entry.sender}
         body={entry.body}
         timeStamp={entry.timeStamp}
+        liked={entry.liked}
+        toggleLike={props.onEntryToggleLike}
       />
 
     );
@@ -24,7 +27,16 @@ const ChatLog = (props) => {
     <section>{ChatEntryComponent}</section>);
 };
 ChatLog.propTypes = {
-  entries: PropTypes.array.isRequired,
+  entries: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      sender: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      timeStamp: PropTypes.string.isRequired,
+      liked:PropTypes.bool.isRequired,
+    }),
+  ),
+  onEntryToggleLike:PropTypes.func.isRequired,
 };
 
 export default ChatLog;
