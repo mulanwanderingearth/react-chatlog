@@ -4,14 +4,24 @@ import PropTypes from 'prop-types';
 
 const ChatEntry = (props) => {
   let heart = props.liked ? '❤️' : '🤍';
+  let messageClass;
+  messageClass = props.sender === 'Vladimir' ?'remote':'local';
+
   return (
     // Replace the outer tag name with a semantic element that fits our use case
-    <div className={`chat-entry ${props.className}`}>
+    <div className={`chat-entry ${messageClass}`}>
       <h2 className="entry-name">{props.sender}</h2>
       <section className="entry-bubble">
         <p>{props.body}</p>
         <p className="entry-time"><TimeStamp time={props.timeStamp} /></p>
-        <button className="like" onClick={() => {props.toggleLike && props.toggleLike(props.id);}}>{heart}</button>
+        <button
+          onClick={() => props.toggleLike(props.id)}
+          className="like"
+          aria-label={heart}
+          role="img"
+        >
+          {heart}
+        </button>
       </section>
     </div>
   );

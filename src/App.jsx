@@ -10,14 +10,9 @@ const App = () => {
   const toggleLike = (messageId) => {
     setMessages(messages => {
       return messages.map(message => {
-        if (message.id === messageId) {
-          return { ...message, liked: !message.liked };
-        } else {
-          return message;
-        };
+        return (message.id === messageId) ? { ...message, liked: !message.liked } : message;
       });
     });
-
   };
   return (
     <div id="App">
@@ -25,7 +20,10 @@ const App = () => {
         <h1>Chat Between Vladmir and Estragon {likeCount} ❤️s</h1>
       </header>
       <main>
-        <ChatLog entries={newMessages} onEntryToggleLike={toggleLike}></ChatLog>
+        <ChatLog
+          entries={newMessages}
+          onEntryToggleLike={toggleLike}
+        />
       </main>
     </div>
   );

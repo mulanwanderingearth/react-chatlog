@@ -2,17 +2,10 @@ import ChatEntry from './ChatEntry';
 import './ChatLog.css';
 import PropTypes from 'prop-types';
 const ChatLog = (props) => {
-  const ChatEntryComponent = props.entries.map(entry => {
-    let messageClass;
-    if (entry.sender === 'Vladimir') {
-      messageClass = 'remote';
-    } else {
-      messageClass = 'local';
-    };
+  const chatEntryComponent = props.entries.map(entry => {
     return (
       <ChatEntry
         id={entry.id}
-        className={messageClass}
         key={entry.id}
         sender={entry.sender}
         body={entry.body}
@@ -20,11 +13,10 @@ const ChatLog = (props) => {
         liked={entry.liked}
         toggleLike={props.onEntryToggleLike}
       />
-
     );
   });
   return (
-    <section>{ChatEntryComponent}</section>);
+    <section>{chatEntryComponent}</section>);
 };
 ChatLog.propTypes = {
   entries: PropTypes.arrayOf(
